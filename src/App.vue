@@ -1,28 +1,32 @@
 <template>
-  <sideBarVue v-show="route.path != '/Login'" />
+  <sideVue v-show="path != '/Login'" />
   <div class="content">
-    <navVue v-show="route.path != '/Login'" />
+    <navVue v-show="path != '/Login'" />
     <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import sideBarVue from "./components/sideBar.vue"
+import { computed, defineComponent, onMounted, ref } from "vue";
+import sideVue from "./components/sideBar.vue"
 import navVue from "./components/nav.vue";
 import { asyncGet } from "./utils/tool/fetch";
 import { apis } from "./utils/tool/apis";
-import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "./utils/store/user";
 export default defineComponent({
-  components: {navVue},
+  components: {navVue,sideVue},
   setup() {
     const route = useRoute();
     const router = useRouter();
     const user = useUserStore();
+
+    const path = computed(()=>{
+      return route.path
+    })
     onMounted(() => {
       if (localStorage.getItem("jwt")) {
-        asyncGet(apis.check, true).then((res) => {
+        asyncGet(apis.check).then((res) => {
           if (res.code == "403") {
             router.push("/Login");
           } else if (res.code == "200") {
@@ -43,7 +47,7 @@ export default defineComponent({
       }
     })
     return {
-      route,
+      route,path
     }
   }
 })

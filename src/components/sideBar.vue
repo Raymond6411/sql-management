@@ -55,7 +55,7 @@ watch(path, (newPath) => {
 
 <style lang="scss">
 .side {
-  min-width: 10%;
+  min-width: 7%;
   height: 100vh;
   .el-menu-item {
     padding: 1%;
