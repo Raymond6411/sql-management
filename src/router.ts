@@ -9,10 +9,11 @@ const routes: RouteRecordRaw[] = [
     { path: '/Login', name: 'Login', component: () => import('./views/Login.vue')},
     { path: '/Browse', name: 'Browse', component: () => import('./views/browse.vue')},
     { path: '/Material', name: 'Material', component: () => import('./views/Material.vue')},
-    { path: '/Product', name: 'Product', component: () => import('./views/product.vue')},
+    { path: '/Product/:name', name: 'Product', component: () => import('./views/product.vue')},
     { path: '/Transation', name: 'Transation', component: () => import('./views/Transation.vue')},
     { path: '/Use', name: 'Use', component: () => import('./views/use.vue')},
     { path: '/User', name: 'User', component: () => import('./views/user.vue')},
+    { path: '/Record', name: 'record', component: () => import('./views/record.vue')},
 ]   
 
 // RouterOptions是路由选项类型

@@ -36,6 +36,12 @@
         </el-icon>
         <span>會員</span>
       </el-menu-item>
+      <el-menu-item index="7" @click="to('/Record')">
+        <el-icon>
+          <i class="bi bi-card-checklist"></i>
+        </el-icon>
+        <span>紀錄</span>
+      </el-menu-item>
     </el-menu>
 </template>
 

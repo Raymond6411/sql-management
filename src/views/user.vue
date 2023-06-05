@@ -1,9 +1,9 @@
 <template>
     <div class="wrapper">
-      <el-table :data="Users" stripe style="width: 100%">
-        <el-table-column prop="name" label="name" width="180" />
-        <el-table-column prop="Address" label="Address" width="180" />
-        <el-table-column prop="phone" label="phone" width="180" />
+      <el-table :data="Users" stripe style="width: 100%" max-height="850">
+        <el-table-column prop="name" label="用戶名" width="180" />
+        <el-table-column prop="Address" label="住址" width="180" />
+        <el-table-column prop="phone" label="電話" width="180" />
         <el-table-column prop="email" label="email" />
       </el-table>
     </div>
@@ -25,9 +25,7 @@ const sync = () => {
 };
 
 onMounted(() => {
-  if (Users.value.length == 0) {
-    sync();
-  }
+  sync();
 });
 </script>
 

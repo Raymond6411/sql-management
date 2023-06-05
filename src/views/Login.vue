@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
       <div class="login-container">
-        <div class="title">後台登入</div>
+        <div class="title">飲料店倉儲管理系統登入</div>
         <el-form-item prop="username">
           <el-input
             ref="username"

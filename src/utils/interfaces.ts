@@ -14,6 +14,13 @@ export interface Product {
     price: number,
 }
 
+export interface Record {
+    pId: string 
+    tId: string 
+    salePrice: number 
+    amount: number 
+}
+
 export interface Use{
     INo: string,
     pId: string,
@@ -40,5 +47,5 @@ export interface User{
 export interface Transaction {
     mId: string,
     tId: string,
-    transTime: Date,
+    transTime: string,
 }

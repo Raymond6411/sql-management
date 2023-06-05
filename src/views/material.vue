@@ -1,10 +1,9 @@
 <template>
   <div class="wrapper">
-    <el-table :data="Materials" stripe style="width: 100%">
-      <el-table-column prop="mId" label="mId" width="180" />
-      <el-table-column prop="mType" label="mType" width="180" />
-      <el-table-column prop="mName" label="mName" width="180" />
-      <el-table-column prop="mNum" label="mNum" />
+    <el-table :data="Materials" stripe style="width: 100%" max-height="850">
+      <el-table-column prop="mName" label="名稱" width="180" />
+      <el-table-column prop="mType" label="類型" width="180" />
+      <el-table-column prop="mNum" label="數量" />
     </el-table>
   </div>
 </template>
@@ -25,9 +24,7 @@ const sync = () => {
 };
 
 onMounted(() => {
-  if (Materials.value.length == 0) {
-    sync();
-  }
+  sync();
 });
 </script>
 

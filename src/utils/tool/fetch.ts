@@ -1,7 +1,7 @@
 import { apis } from "./apis"
 const jwt = localStorage.getItem('jwt');
 
-export async function asyncGet(api: string, Authorization?: string) {
+export async function asyncGet(api: string, mode?:string , Authorization?: string) {
     try {
         const res: Response = await fetch(
             api,
@@ -13,7 +13,15 @@ export async function asyncGet(api: string, Authorization?: string) {
             }
         )
         try {
-            let data = res.json()
+            let data
+            switch (mode) {
+                case "text":
+                    data = res.text()
+                    break;
+                default:
+                    data = res.json()
+                    break;
+            }
             return data
         } catch (error) {
             console.log(error)

@@ -1,38 +1,58 @@
 <template>
-    <div class="wrapper">
-      <el-table :data="Browses" stripe style="width: 100%">
-        <el-table-column prop="_id" label="_id" width="180" />
-        <el-table-column prop="uid" label="uid" width="180" />
-        <el-table-column prop="pid" label="pid" width="180" />
-        <el-table-column prop="browseTime" label="browseTime" />
-      </el-table>
-    </div>
-  </template>
+  <div class="wrapper">
+    <el-table :data="Browses" stripe style="width: 100%" max-height="850">
+      <el-table-column prop="user" label="用戶" width="180" />
+      <el-table-column prop="product" label="產品" width="180" />
+      <el-table-column prop="browseTime" label="瀏覽時間" />
+    </el-table>
+  </div>
+</template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { asyncGet } from "../utils/tool/fetch";
 import { apis } from "../utils/tool/apis";
 import { Browse } from "../utils/interfaces";
 
-const Browses = ref<Array<Browse>>([]);
+interface browse {
+  user: string;
+  product: string;
+  browseTime: string;
+}
+const Browses = ref<Array<browse>>([]);
 
 const sync = () => {
+  Browses.value = []
   asyncGet(apis.getBrowse).then((res: Array<Browse>) => {
-    Browses.value = res;
-    console.log(res);
+
+    res.forEach((browse) => {
+
+      const temp = <browse>{};
+      temp.browseTime = `${new Date(browse.browseTime).toLocaleDateString()}  ${new Date(browse.browseTime).toLocaleTimeString()}`;
+
+      asyncGet(`${apis.findNameById}?id=${browse.uid}`, "text").then((user) => {
+        temp.user = user;
+        
+        asyncGet(`${apis.findProductNameById}?id=${browse.pid}`).then(
+          (product) => {
+            temp.product = product.pName;
+            Browses.value.push(temp);
+          }
+        );
+
+      });
+    });
+
   });
 };
 
 onMounted(() => {
-  if (Browses.value.length == 0) {
-    sync();
-  }
+  sync();
 });
 </script>
 
 <style lang="scss">
-.wrapper{
+.wrapper {
   padding: 1%;
 }
 </style>

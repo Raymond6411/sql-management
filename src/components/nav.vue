@@ -1,6 +1,6 @@
 <template>
     <div class="navtop">
-    <span>{{ user.user.account }}</span>
+    <span>目前登入用戶: {{ user.user.account }}</span>
   </div>
 </template>
 
